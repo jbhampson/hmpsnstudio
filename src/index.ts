@@ -24,6 +24,10 @@ barba.hooks.after(async () => {
   await restartWebflow();
 });
 
+barba.hooks.beforeEnter(() => {
+  dataLayer.push({ event: 'VirtualPageview', virtualPageURL: currentUrl, virtualPageTitle: title });
+});
+
 barba.hooks.enter(() => {
   let scrollX = 0;
   const newLocal = 0;
