@@ -22,9 +22,6 @@ barba.init({
 
 barba.hooks.after(async () => {
   await restartWebflow();
-});
-
-barba.hooks.beforeEnter(() => {
   dataLayer.push({ event: 'VirtualPageview', virtualPageURL: currentUrl, virtualPageTitle: title });
 });
 
