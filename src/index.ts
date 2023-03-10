@@ -24,6 +24,16 @@ barba.hooks.after(async () => {
   await restartWebflow();
 });
 
-if (history.scrollRestoration) {
-  history.scrollRestoration = 'manual';
-}
+barba.hooks.enter(() => {
+  let scrollX = 0;
+  const newLocal = 0;
+  let scrollY = newLocal;
+
+  barba.hooks.leave(() => {
+    scrollX = barba.history.current.scroll.x;
+    scrollY = barba.history.current.scroll.y;
+  });
+
+  // then later in the code...
+  window.scrollTo(scrollX, scrollY);
+});
