@@ -23,3 +23,7 @@ barba.init({
 barba.hooks.after(async () => {
   await restartWebflow();
 });
+
+if (history.scrollRestoration) {
+  history.scrollRestoration = 'manual';
+}
