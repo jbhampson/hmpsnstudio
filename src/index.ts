@@ -21,20 +21,17 @@ barba.init({
 });
 
 barba.hooks.after(async () => {
-  await restartWebflow();
-  dataLayer.push({ event: 'VirtualPageview', virtualPageURL: currentUrl, virtualPageTitle: title });
+  restartWebflow();
 });
 
 barba.hooks.enter(() => {
-  let scrollX = 0;
+  const scrollX = 0;
   const newLocal = 0;
-  let scrollY = newLocal;
+  const scrollY = newLocal;
+});
 
-  barba.hooks.leave(() => {
-    scrollX = barba.history.current.scroll.x;
-    scrollY = barba.history.current.scroll.y;
-  });
-
-  // then later in the code...
+barba.hooks.leave(() => {
+  scrollX = barba.history.current.scroll.x;
+  scrollY = barba.history.current.scroll.y;
   window.scrollTo(scrollX, scrollY);
 });
