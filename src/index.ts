@@ -22,7 +22,6 @@ barba.init({
 
 barba.hooks.after(async () => {
   await restartWebflow();
-  dataLayer.push({ event: 'VirtualPageview', virtualPageURL: currentUrl, virtualPageTitle: title });
 });
 
 let scrollX = 0;
