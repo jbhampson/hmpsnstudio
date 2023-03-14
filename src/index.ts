@@ -20,9 +20,12 @@ barba.init({
   ],
 });
 
-barba.hooks.enter(async (data) => {
+history.scrollRestoration = 'manual';
+const scrollPosY = [0];
+
+barba.hooks.enter((data) => {
   if (data.trigger !== 'back') {
-    scrollY.push(barba.history.current.scroll.y);
+    scrollPosY.push(barba.history.current.scroll.y);
   }
 });
 
@@ -31,6 +34,6 @@ barba.hooks.after(async (data) => {
   if (data.trigger !== 'back') {
     window.scrollTo(0, 0);
   } else {
-    window.scrollTo(0, scrollY.pop());
+    window.scrollTo(0, scrollPosY.pop());
   }
 });
