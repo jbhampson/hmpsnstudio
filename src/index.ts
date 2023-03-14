@@ -30,7 +30,7 @@ barba.hooks.enter(async (data) => {
 });
 
 barba.hooks.after(async (data) => {
-  await restartWebflow;
+  restartWebflow;
   if (data.trigger !== 'back') {
     window.scrollTo(0, 0);
   } else {
