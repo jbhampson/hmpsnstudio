@@ -7,7 +7,7 @@ barba.init({
     {
       name: 'default',
       async leave(data) {
-        console.log('leave new');
+        console.log('leave');
         console.log(data);
         await gsap.to(data.current.container, { opacity: 0, duration: 0.5 });
       },
@@ -20,18 +20,17 @@ barba.init({
   ],
 });
 
-barba.hooks.after(async () => {
+barba.hooks.enter(async (data) => {
+  if (data.trigger !== 'back') {
+    scrollY.push(barba.history.current.scroll.y);
+  }
+});
+
+barba.hooks.after(async (data) => {
   await restartWebflow();
+  if (data.trigger !== 'back') {
+    window.scrollTo(0, 0);
+  } else {
+    window.scrollTo(0, scrollY.pop());
+  }
 });
-
-let scrollX = 0;
-const newLocal = 0;
-let scrollY = newLocal;
-
-barba.hooks.leave(() => {
-  scrollX = barba.history.current.scroll.x;
-  scrollY = barba.history.current.scroll.y;
-});
-
-// then later in the code...
-window.scrollTo(scrollX, scrollY);
