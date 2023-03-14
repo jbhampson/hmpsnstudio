@@ -7,7 +7,7 @@ barba.init({
     {
       name: 'default',
       async leave(data) {
-        console.log('leave');
+        console.log('leave new');
         console.log(data);
         await gsap.to(data.current.container, { opacity: 0, duration: 0.5 });
       },
@@ -25,16 +25,14 @@ barba.hooks.after(async () => {
   dataLayer.push({ event: 'VirtualPageview', virtualPageURL: currentUrl, virtualPageTitle: title });
 });
 
-barba.hooks.enter(() => {
-  let scrollX = 0;
-  const newLocal = 0;
-  let scrollY = newLocal;
+let scrollX = 0;
+const newLocal = 0;
+let scrollY = newLocal;
 
-  barba.hooks.leave(() => {
-    scrollX = barba.history.current.scroll.x;
-    scrollY = barba.history.current.scroll.y;
-  });
-
-  // then later in the code...
-  window.scrollTo(scrollX, scrollY);
+barba.hooks.leave(() => {
+  scrollX = barba.history.current.scroll.x;
+  scrollY = barba.history.current.scroll.y;
 });
+
+// then later in the code...
+window.scrollTo(scrollX, scrollY);
