@@ -23,14 +23,14 @@ barba.init({
 history.scrollRestoration = 'manual';
 const scrollPosY = [0];
 
-barba.hooks.enter((data) => {
+barba.hooks.enter(async (data) => {
   if (data.trigger !== 'back') {
     scrollPosY.push(barba.history.current.scroll.y);
   }
 });
 
 barba.hooks.after(async (data) => {
-  await restartWebflow();
+  await restartWebflow;
   if (data.trigger !== 'back') {
     window.scrollTo(0, 0);
   } else {
